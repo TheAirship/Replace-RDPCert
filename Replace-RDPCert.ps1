@@ -1,4 +1,4 @@
-﻿<#
+<#
 
 .SYNOPSIS
 Replace the TLS certificate used by the Windows operating system for Remote Desktop Services with a CA-signed cert.
