@@ -1,5 +1,7 @@
 # Replace-RDPCert
 
+![helpimage](https://github.com/TheAirship/Replace-RDPCert/blob/main/Images/RRDPC_Process.PNG)
+
 By default, Windows systems create a self-signed certificate for use by Remote Desktop Services when it is enabled. This is the same self-signed certificate that causes the ubiquitous "The identity of the remote computer cannot be verified" errors and appears constantly on vulnerability scans with findings like "Untrusted certificate detected on TCP 3389" and "Remote Desktop using self-signed certificate". But simply replacing the certificate in Windows' Remote Desktop certificate store *won't* actually change the certificate that the system uses to negotiate an encrypted RDP connection. It's necessary to use PowerShell or WMIC commands to reconfigure WMI to use the replacement certificate.
 
 Replace-RDPCert is a PowerShell script that simplifies the process of replacing the certificate used by Remote Desktop Services on a Windows system. Unlike applying the Remote Desktop cert through GPO, Replace-RDPCert allows for granular customization of the issued cert through creation or use of a RequestPolicy.inf file. Specifically, this means that SANs can be added to the cert. By default, Replace-RDPCert will create a certificate with SANs for a system's FQDN, hostname, and IP address, but changes can be made by passing a custom RequestPolicy.inf file to the script as shown in *Use Case Scenario 1* below.
