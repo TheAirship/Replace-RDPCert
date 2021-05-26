@@ -188,7 +188,7 @@ function Check-IssuingCA ($caName) {
 
     Write-Host "[STATUS] Confirming that the ADCS service is reachable on the CA" -NoNewline
 
-    $caCheck = certutil -ping -config "sca.theairship.local\airshipsubca"
+    $caCheck = certutil -ping -config $caName
 
     If ($caCheck -match "interface is alive") {
 
