@@ -14,13 +14,13 @@ There are only a few recommended prerequisites for using Replace-RDPCert efficie
 - Active Directory Certificate Services (ADCS) should be configured for the target system's domain, and an authorized issuing CA should be reachable
 - A certificate template with configurations appropriate to Remote Desktop Services must be available for issue by the issuing CA
 
-To clarify, ADCS isn't strictly required. It should be possible to use a cert issued by a third-party CA as long as the target system has a private key associated with the cert. It would also be a good idea for the issuing CA and / or the issuing CA's root CA to be trusted by the target system. See *Use Case Scenarios #2* and *#4* below for reference.
+To clarify, ADCS isn't strictly required. It should be possible to use a cert issued by a third-party CA as long as the target system has a private key associated with the cert. It would also be a good idea for the issuing CA and / or the issuing CA's root CA to be trusted by the target system. See *Use Case Scenarios #3* below for reference.
 
-There are many resources to guide the creation of a certificate template for RDP, so that won't be covered here. Replace-RDPCert will work most efficiently with a certificate template that does *not* require CA Manager approval for issuance. Since issuing certain certs without CA manager approval may violate some organizations' security policy, the script is also able to retrieve and install a certificate after CA manager approval. See *Use Case Scenario #3* below.
+There are many resources to guide the creation of a certificate template for RDP, so that won't be covered here. Replace-RDPCert will work most efficiently with a certificate template that does *not* require CA Manager approval for issuance. Since issuing certain certs without CA manager approval may violate some organizations' security policy, the script is also able to retrieve and install a certificate after CA manager approval. See *Use Case Scenario #2* and *#3* below.
 
 ## Use Cases & Command Examples
 
-There are 4 Use Cases that Replace-RDPCert can help with.
+There are 4 use cases that Replace-RDPCert can help with.
 
 ### Scenario #1 - Soup to Nuts
 
