@@ -1,13 +1,14 @@
-<#
+﻿<#
 
 .SYNOPSIS
-Replace the TLS certificate used by the Windows operating system for Remote Desktop Services with a CA-signed cert.
+Replace the self-signed TLS certificate used by the Windows operating system for Remote Desktop Services with a CA-signed 
+cert.
 
 .DESCRIPTION
-Replaces TLS certificates used by the target machine for Remote Desktop Services with a certificate that is
-signed by an Active Directory Certificate Services (ADCS) Certificate Authority (CA). The CA must be reachable 
-by the target computer, and a relevant certificate template must be available for enrollment. Only two parameters 
-are required: the name of the CA and the name of the certificate template. A properly-formatted, custom 
+Replaces self-signed TLS certificates used by the target machine for Remote Desktop Services with a certificate that is
+signed by a Certificate Authority (CA), usually viaActive Directory Certificate Services (ADCS). The CA must be reachable 
+by the target computer, and a relevant certificate template must be available for enrollment. Only two parameters are 
+required for a basic request: the name of the CA and the name of the certificate template. A properly-formatted, custom 
 RequestPolicy.inf file may be passed using an optional parameter.
 
 .PARAMETER CAName
@@ -20,8 +21,8 @@ The name of the certificate template that will be used for the creation of the R
 certificate template, not the display name, is required. 
 
 .PARAMETER ReqFile
-A specific RequestPolicy.inf file created by the user. Will replace the boilerplate RequestPolicy.inf file when passed to 
-Replace-RDPCert.
+A specific RequestPolicy.inf file created by the user. Will replace the boilerplate RequestPolicy.inf file created 
+automatically by the script.
 
 .PARAMETER StagingDir
 The staging directory used to prepare the certificate request files. Replace-RDSCert defaults to the user's Desktop, but
@@ -36,7 +37,7 @@ The thumbprint of a certificate that has already been imported into the system's
 the system's Remote Desktop Services.
 
 .PARAMETER ReqID
-The request ID for a certificate request that has been taken under submission by an issuing CA. The request ID can be
+The request ID for a certificate request that has been taken under review by an issuing CA. The request ID can be
 passed to the script after the requested certificate has been issued. The certificate will be retrieved, imported
 and applied.
 
@@ -45,8 +46,8 @@ Replace-RDPCert -CertTemplate RDPCert
 
 Description
 --------------------------------
-Requests a certificate with the 'RDPCert' template from the system-configured issuing CA using a boilerplate RequestPolicy.inf file, 
-applies it to Remote Desktop Services on the local machine, and cleans up all files created in the process.
+Requests a certificate with the 'RDPCert' template from the system-configured issuing CA using a boilerplate RequestPolicy.inf 
+file, applies it to Remote Desktop Services on the local machine, and cleans up all files created in the process.
 
 .EXAMPLE
 Replace-RDPCert -CAName subCA.example.local\ExampleSubCA -CertTemplate RDPCert -ReqFile C:\Users\example\Desktop\RequestPolicy.inf
@@ -83,7 +84,7 @@ used only after the pending certificate request has been approved.
 .NOTES
 FunctionName : Replace-RDPCert
 Author       : Craig Jackson
-Version      : 1.0 (5/24/2021)
+Version      : 1.0.0 (5/25/2021)
 License      : Apache 2.0
 More Info    : https://www.github.com/theairship/replace-rdpcert
 
@@ -705,7 +706,7 @@ Write-Host "`r"
 Write-Host ("*" * 70)
 Write-Host "* Replace-RDPCert $(" " * 50) *"
 Write-Host "* Version: $currVersion $(" " * (70 - (14 + $currVersion.length))) *"
-Write-Host "* More Info: https://www.github.com/theaiarship/replace-rdpcert      *"
+Write-Host "* More Info: https://www.github.com/theairship/replace-rdpcert       *"
 Write-Host ("*" * 70)
 Write-Host "`r"
 
