@@ -1,6 +1,6 @@
 # Replace-RDPCert
 
-![helpimage](https://github.com/TheAirship/Replace-RDPCert/blob/main/Images/RRDPC_Process.PNG)
+![helpimage](https://github.com/TheAirship/Replace-RDPCert/blob/main/Images/RRDPC_Process1.PNG)
 
 By default, Windows systems create a self-signed certificate for use by Remote Desktop Services when it is enabled. This is the same self-signed certificate that causes the ubiquitous "The identity of the remote computer cannot be verified" errors and appears constantly on vulnerability scans with findings like "Untrusted certificate detected on TCP 3389" and "Remote Desktop using self-signed certificate". But simply replacing the certificate in Windows' Remote Desktop certificate store *won't* actually change the certificate that the system uses to negotiate an encrypted RDP connection. It's necessary to use PowerShell or WMIC commands to reconfigure WMI to use the replacement certificate.
 
