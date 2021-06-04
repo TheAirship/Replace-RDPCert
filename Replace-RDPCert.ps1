@@ -84,7 +84,7 @@ used only after the pending certificate request has been approved.
 .NOTES
 FunctionName : Replace-RDPCert
 Author       : Craig Jackson
-Version      : 1.0.0 (5/25/2021)
+Version      : 1.0.1 (6/3/2021)
 License      : Apache 2.0
 More Info    : https://www.github.com/theairship/replace-rdpcert
 
@@ -396,7 +396,7 @@ function Get-RDPCert ($stgDir, $caName, $compName, $csrFile) {
 
         $crtFile = "$stgDir\$compName-RDP.cer"
     
-        $caResp = certreq -submit -f -config $caName $csrFile $crtFile # | Out-Null
+        $caResp = certreq -submit -f -q -config $caName $csrFile $crtFile
 
         If ($caResp -imatch "retrieved") {
 
@@ -419,6 +419,16 @@ function Get-RDPCert ($stgDir, $caName, $compName, $csrFile) {
                     -Download the certificate manually and pass it to this script for import using the -CertFile parameter, or
                     -Re-run the script and use the -ReqID parameter with the Request ID $reqID"
             Invoke-Failure $global:succCount $global:failCount $failStr            
+
+        }
+
+        ElseIf ($caResp -imatch "is unavailable and cannot be added") {
+
+            $global:failCount++
+            $failStr = "The subject name selected for this request could not be found. This sometimes happens when the selected certificate template is configured
+                 to load the subject name from an Active Directory attribute that hasn't been populated. Either confirm that the Active Directory attribute
+                 you selected (e.g., DNS name) is populated for this system, or reconfigure the template to supply the subject name in the request"
+            Invoke-Failure $global:succCount $global:failCount $failStr  
 
         }
 
