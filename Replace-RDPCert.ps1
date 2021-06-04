@@ -6,7 +6,7 @@ cert.
 
 .DESCRIPTION
 Replaces self-signed TLS certificates used by the target machine for Remote Desktop Services with a certificate that is
-signed by a Certificate Authority (CA), usually viaActive Directory Certificate Services (ADCS). The CA must be reachable 
+signed by a Certificate Authority (CA), usually via Active Directory Certificate Services (ADCS). The CA must be reachable 
 by the target computer, and a relevant certificate template must be available for enrollment. Only two parameters are 
 required for a basic request: the name of the CA and the name of the certificate template. A properly-formatted, custom 
 RequestPolicy.inf file may be passed using an optional parameter.
@@ -149,7 +149,7 @@ function Get-IssuingCA {
 
     Try {
 
-        $caName = (certutil | Select-String "Config").ToString().Split(":")[1].Trim().Replace("`"","")
+        $caName = (certutil | Select-String "Config").ToString().Split(":")[1].Trim().Replace("`"","").Replace("``","").Replace("`'","")
 
         If ($caName -eq "") {
 
